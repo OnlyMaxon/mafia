@@ -110,6 +110,65 @@
   font-size: 0.9rem;
 }
 
+.socials {
+  background: rgba(255, 0, 100, 0.1);
+  border: 2px solid #ff0064;
+  padding: 25px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.socials h3 {
+  margin-top: 0;
+  font-size: 1.3rem;
+  color: #ff6b9d;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.social-btn.instagram {
+  background: linear-gradient(135deg, #ff0064 0%, #ff6b9d 100%);
+  border-color: #ff0064;
+}
+
+.social-btn.instagram:hover {
+  background: linear-gradient(135deg, #ff6b9d 0%, #ff0064 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 0, 100, 0.4);
+}
+
+.social-btn.telegram {
+  background: linear-gradient(135deg, #0088cc 0%, #00d4ff 100%);
+  border-color: #0088cc;
+}
+
+.social-btn.telegram:hover {
+  background: linear-gradient(135deg, #00d4ff 0%, #0088cc 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
+}
+
 @media (max-width: 600px) {
   .header h1 {
     font-size: 2.5rem;
