@@ -1,0 +1,200 @@
+.host-waiting {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  padding: 20px;
+}
+
+.host-waiting .container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.waiting-card {
+  background: rgba(22, 33, 62, 0.8);
+  border: 1px solid rgba(255, 0, 100, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.waiting-card h1 {
+  font-size: 2rem;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.game-code {
+  background: rgba(255, 0, 100, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 30px;
+  border: 1px solid rgba(255, 0, 100, 0.3);
+  font-size: 1.1rem;
+}
+
+.game-code strong {
+  color: #ff0064;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.info-section {
+  background: rgba(0, 212, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.info-section h2 {
+  margin: 0 0 15px 0;
+  color: #00d4ff;
+  font-size: 1.2rem;
+}
+
+.roles-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.role-tag {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.players-section {
+  margin-bottom: 30px;
+}
+
+.players-section h2 {
+  margin: 0 0 20px 0;
+  color: #e0e0e0;
+  font-size: 1.2rem;
+}
+
+.players-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.player-item {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.player-item:last-child {
+  border-bottom: none;
+}
+
+.player-number {
+  background: rgba(255, 0, 100, 0.2);
+  color: #ff0064;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.player-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.player-status {
+  color: #00ff00;
+  font-weight: 700;
+}
+
+.no-players {
+  text-align: center;
+  color: #888;
+  padding: 30px 15px;
+  font-style: italic;
+}
+
+.btn-large {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #ff0064 0%, #ff6b9d 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-large:hover:not(:disabled) {
+  box-shadow: 0 10px 30px rgba(255, 0, 100, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-large:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .waiting-card {
+    padding: 25px 15px;
+  }
+
+  .waiting-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .roles-summary {
+    grid-template-columns: 1fr;
+  }
+}

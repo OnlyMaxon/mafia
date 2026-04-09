@@ -1,0 +1,186 @@
+.player-waiting {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.waiting-card {
+  background: rgba(22, 33, 62, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.waiting-card h1 {
+  font-size: 2rem;
+  margin: 0 0 20px 0;
+}
+
+.game-code {
+  background: rgba(0, 212, 255, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  font-size: 1.1rem;
+}
+
+.game-code strong {
+  color: #00d4ff;
+  font-weight: 700;
+}
+
+.role-revealed {
+  background: rgba(0, 212, 255, 0.15);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 2px dashed rgba(0, 212, 255, 0.4);
+  animation: pulse 0.5s ease-in-out;
+}
+
+.role-revealed h2 {
+  margin: 0 0 15px 0;
+  color: #00d4ff;
+}
+
+.role-badge {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff0064 0%, #ff6b9d 100%);
+  padding: 20px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.role-waiting {
+  background: rgba(255, 165, 0, 0.1);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 2px dashed rgba(255, 165, 0, 0.4);
+}
+
+.role-waiting h2 {
+  margin: 0;
+  color: #ffb366;
+  animation: blink 1.5s infinite;
+}
+
+.players-list {
+  text-align: left;
+}
+
+.players-list h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #e0e0e0;
+}
+
+.players-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.players-list li {
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.players-list li:last-child {
+  border-bottom: none;
+}
+
+.player-name {
+  font-weight: 600;
+  color: #fff;
+}
+
+.player-role {
+  background: rgba(255, 0, 100, 0.2);
+  color: #ff0064;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.game-started {
+  background: rgba(0, 212, 255, 0.15);
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid rgba(0, 212, 255, 0.4);
+  margin-top: 20px;
+  animation: slideIn 0.5s ease-out;
+}
+
+.game-started h2 {
+  margin: 0;
+  color: #00d4ff;
+  font-size: 1.5rem;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%, 49%, 100% {
+    opacity: 1;
+  }
+  50%, 99% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 500px) {
+  .waiting-card {
+    padding: 30px 20px;
+  }
+
+  .waiting-card h1 {
+    font-size: 1.5rem;
+  }
+
+  .role-badge {
+    font-size: 2rem;
+    padding: 15px;
+  }
+}
