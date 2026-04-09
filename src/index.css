@@ -22,6 +22,7 @@ html, body {
   color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 body {
@@ -31,6 +32,8 @@ body {
 #root {
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -45,6 +48,24 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+/* Scrollbar styling */
+#root::-webkit-scrollbar {
+  width: 8px;
+}
+
+#root::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#root::-webkit-scrollbar-thumb {
+  background: #ff0064;
+  border-radius: 4px;
+}
+
+#root::-webkit-scrollbar-thumb:hover {
+  background: #ff6b9d;
 }
 
 code {
