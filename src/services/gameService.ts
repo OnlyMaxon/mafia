@@ -132,6 +132,14 @@ export class GameService {
     }));
   }
 
+  // Обновляет статус игры
+  static async updateGameStatus(gameCode: string, status: string): Promise<void> {
+    await update(ref(database, `games/${gameCode}`), {
+      status,
+      updatedAt: Date.now(),
+    });
+  }
+
   // Слушает изменения игроков в реальном времени
   static watchPlayers(
     gameCode: string,

@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { HostAuth } from './pages/HostAuth';
 import { HostEditor } from './pages/HostEditor';
 import { HostWaiting } from './pages/HostWaiting';
+import { HostGame } from './pages/HostGame';
 import { PlayerJoin } from './pages/PlayerJoin';
 import { PlayerWaiting } from './pages/PlayerWaiting';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/host-auth" element={<HostAuth />} />
         <Route path="/host-editor" element={<HostEditor />} />
         <Route path="/host-waiting/:gameCode" element={<HostWaiting />} />
+        <Route path="/host-game/:gameCode" element={<HostGame />} />
         <Route path="/player-join" element={<PlayerJoin />} />
         <Route path="/player-waiting/:gameCode" element={<PlayerWaiting />} />
       </Routes>
