@@ -10,8 +10,16 @@ export const HostGame: React.FC = () => {
   const navigate = useNavigate();
   const [game, setGame] = useState<GameState | null>(null);
   const [players, setPlayers] = useState<Player[]>([]);
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = useState(() => {
+    // Получаем заметки из localStorage
+    return localStorage.getItem(`notes_${gameCode}`) || '';
+  });
   const [loading, setLoading] = useState(true);
+
+  // Сохраняем заметки в localStorage при изменении
+  useEffect(() => {
+    localStorage.setItem(`notes_${gameCode}`, notes);
+  }, [notes, gameCode]);
 
   useEffect(() => {
     if (!gameCode) {
@@ -24,13 +32,15 @@ export const HostGame: React.FC = () => {
       setGame(updatedGame);
       setLoading(false);
 
-      // Если игра закончилась
+      // Если игра завершилась
       if (updatedGame?.status === 'finished') {
         setTimeout(() => {
           if (window.confirm('🎉 Игра закончилась! Хотите начать новую?')) {
+            // Очищаем заметки из localStorage
+            localStorage.removeItem(`notes_${gameCode}`);
             navigate('/host-editor');
           }
-        }, 1000);
+        }, 500);
       }
     });
 
@@ -51,8 +61,19 @@ export const HostGame: React.FC = () => {
   const handleFinishGame = async () => {
     if (!gameCode) return;
 
-    if (window.confirm('Вы уверены, что хотите завершить игру?')) {
+    if (window.confirm('🛑 Вы уверены? Все данные игры будут удалены с сервера!')) {
+      // Сначала устанавливаем статус 'finished' - это даст всем игрокам знать о завершении
       await GameService.updateGameStatus(gameCode, 'finished');
+      
+      // Ждем 2 секунды, чтобы осталось время для синхронизации
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Потом удаляем игру с сервера
+      await GameService.deleteGame(gameCode);
+      
+      // Очищаем локальные заметки
+      localStorage.removeItem(`notes_${gameCode}`);
+      navigate('/host-editor');
     }
   };
 
@@ -66,13 +87,13 @@ export const HostGame: React.FC = () => {
     );
   }
 
-  if (!game) {
+  if (!game || game.status === 'finished') {
     return (
       <div className="host-game">
         <div className="container">
-          <h1>❌ Игра не найдена</h1>
+          <h1>❌ Игра завершена или не найдена</h1>
           <button className="btn btn-secondary" onClick={() => navigate('/host-editor')}>
-            ← Вернуться
+            ← Новая игра
           </button>
         </div>
       </div>
@@ -126,21 +147,6 @@ export const HostGame: React.FC = () => {
             <button className="btn btn-secondary" onClick={handleClearNotes}>
               🗑️ Очистить заметки
             </button>
-          </div>
-        </div>
-
-        <div className="game-info">
-          <div className="info-box">
-            <span>Раунд:</span>
-            <strong>{game.round}</strong>
-          </div>
-          <div className="info-box">
-            <span>Фаза:</span>
-            <strong>{game.currentPhase === 'day' ? '☀️ День' : '🌙 Ночь'}</strong>
-          </div>
-          <div className="info-box">
-            <span>Статус:</span>
-            <strong>{game.status === 'playing' ? '🎮 Игра идёт' : '⏸️ Пауза'}</strong>
           </div>
         </div>
       </div>

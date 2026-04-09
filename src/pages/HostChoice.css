@@ -1,0 +1,166 @@
+.host-choice {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.choice-card {
+  background: rgba(22, 33, 62, 0.8);
+  border: 1px solid rgba(255, 0, 100, 0.2);
+  border-radius: 12px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.choice-card h1 {
+  font-size: 2.2rem;
+  margin: 0 0 10px 0;
+}
+
+.description {
+  color: #b0b0b0;
+  margin-bottom: 40px;
+}
+
+.buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.action-btn {
+  padding: 16px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.create-btn {
+  background: linear-gradient(135deg, #ff0064 0%, #ff6b9d 100%);
+  color: white;
+}
+
+.create-btn:hover {
+  box-shadow: 0 10px 30px rgba(255, 0, 100, 0.3);
+  transform: translateY(-2px);
+}
+
+.join-btn {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  color: white;
+}
+
+.join-btn:hover {
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.action-btn:disabled,
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 0, 100, 0.3);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #ff0064;
+  background: rgba(255, 0, 100, 0.1);
+}
+
+.error-message {
+  background: rgba(255, 0, 0, 0.1);
+  border-left: 3px solid #ff0000;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  color: #ff6b6b;
+  font-weight: 600;
+  text-align: left;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover:not(:disabled) {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff0064 0%, #ff6b9d 100%);
+  color: white;
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  color: white;
+}
+
+@media (max-width: 500px) {
+  .choice-card {
+    padding: 30px 20px;
+  }
+
+  .choice-card h1 {
+    font-size: 1.8rem;
+  }
+
+  .action-btn {
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+}

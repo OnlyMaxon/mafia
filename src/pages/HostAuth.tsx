@@ -19,7 +19,7 @@ export const HostAuth: React.FC = () => {
     setTimeout(() => {
       if (password === HOST_PASSWORD) {
         localStorage.setItem('hostAuthorized', 'true');
-        navigate('/host-editor');
+        navigate('/host-choice');
       } else {
         setError('❌ Неверный пароль');
         setPassword('');

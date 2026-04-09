@@ -68,6 +68,22 @@ export const PlayerWaiting: React.FC = () => {
     );
   }
 
+  if (game.status === 'finished') {
+    return (
+      <div className="player-waiting">
+        <div className="container">
+          <div className="waiting-card">
+            <h1>🎉 Игра завершена!</h1>
+            <p className="game-code">Код: {gameCode}</p>
+            <button className="btn btn-secondary" onClick={() => navigate('/player-join')}>
+              ← Вернуться к входу
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="player-waiting">
       <div className="container">

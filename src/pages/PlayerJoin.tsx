@@ -5,8 +5,14 @@ import './PlayerJoin.css';
 
 export const PlayerJoin: React.FC = () => {
   const navigate = useNavigate();
-  const [gameCode, setGameCode] = useState('');
-  const [playerName, setPlayerName] = useState('');
+  const [gameCode, setGameCode] = useState(() => {
+    const saved = localStorage.getItem('gameCode');
+    return saved || '';
+  });
+  const [playerName, setPlayerName] = useState(() => {
+    const saved = localStorage.getItem('playerName');
+    return saved || '';
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -21,6 +27,12 @@ export const PlayerJoin: React.FC = () => {
       
       if (!game) {
         setError('❌ Комната не найдена');
+        setIsLoading(false);
+        return;
+      }
+
+      if (game.status === 'finished') {
+        setError('❌ Эта игра уже завершена');
         setIsLoading(false);
         return;
       }
