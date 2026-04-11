@@ -34,9 +34,6 @@ export const Home: React.FC = () => {
             <a href="https://www.instagram.com/0nlymaxon/" target="_blank" rel="noopener noreferrer" className="social-btn instagram">
               👑 Дон (Don): @0nlymaxon
             </a>
-            <a href="https://t.me/+1NnQFAm-xDRmYmM6" target="_blank" rel="noopener noreferrer" className="social-btn telegram">
-              ✈️ Telegram группа
-            </a>
           </div>
         </section>
 

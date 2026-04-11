@@ -118,20 +118,6 @@ export class GameService {
     );
   }
 
-  // Получает всех игроков
-  static async getPlayers(gameCode: string): Promise<Player[]> {
-    const playersRef = ref(database, `games/${gameCode}/players`);
-    const snapshot = await get(playersRef);
-    
-    if (!snapshot.exists()) return [];
-    
-    const playersObj = snapshot.val();
-    return Object.entries(playersObj).map(([id, data]: [string, any]) => ({
-      ...data,
-      id,
-    }));
-  }
-
   // Обновляет статус игры
   static async updateGameStatus(gameCode: string, status: string): Promise<void> {
     await update(ref(database, `games/${gameCode}`), {

@@ -29,12 +29,3 @@ export interface GameState {
   createdAt: number;
   updatedAt: number;
 }
-
-export interface GameSettings {
-  mafia: number;
-  sheriff: number;
-  doctor: number;
-  maniac: number;
-  prostitute: number;
-  civilian: number;
-}
