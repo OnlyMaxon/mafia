@@ -161,4 +161,36 @@ export class GameService {
     });
     return unsubscribe;
   }
+
+  // Слушает изменения игроков, скрывая роли других игроков
+  static watchPlayersForPlayer(
+    gameCode: string,
+    currentPlayerId: string,
+    callback: (players: Player[]) => void
+  ): () => void {
+    const playersRef = ref(database, `games/${gameCode}/players`);
+    const unsubscribe = onValue(playersRef, (snapshot) => {
+      if (!snapshot.exists()) {
+        callback([]);
+        return;
+      }
+      
+      const playersObj = snapshot.val();
+      const players = Object.entries(playersObj).map(([id, data]: [string, any]) => {
+        const player: Player = {
+          ...data,
+          id,
+        };
+        
+        // Скрываем роль других игроков (показываем только свою)
+        if (player.id !== currentPlayerId) {
+          delete player.role;
+        }
+        
+        return player;
+      });
+      callback(players);
+    });
+    return unsubscribe;
+  }
 }

@@ -16,7 +16,12 @@ export const Home: React.FC = () => {
         <section className="about">
           <h2>О нас</h2>
           <p className="about-text">
-            Мафия по ночам • Покер до утра • Афтерпати без правил
+            💬 <strong>Чтобы попасть на игру, напишите Капо:</strong>
+          </p>
+          <p className="contact-info">
+            <a href="https://t.me/nikitosiiiiuuuk" target="_blank" rel="noopener noreferrer" className="contact-link">
+              📱 Telegram: @nikitosiiiiuuuk
+            </a>
           </p>
         </section>
 

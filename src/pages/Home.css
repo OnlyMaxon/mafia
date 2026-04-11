@@ -54,6 +54,28 @@
   color: #d0d0d0;
 }
 
+.contact-info {
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(255, 107, 157, 0.1);
+  border-left: 3px solid #ff6b9d;
+  border-radius: 4px;
+}
+
+.contact-link {
+  color: #ff6b9d;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contact-link:hover {
+  color: #ff0064;
+  text-decoration: underline;
+  transform: translateX(3px);
+}
+
 .contact,
 .instagram {
   font-size: 0.95rem;

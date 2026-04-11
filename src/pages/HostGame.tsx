@@ -21,6 +21,13 @@ export const HostGame: React.FC = () => {
     localStorage.setItem(`notes_${gameCode}`, notes);
   }, [notes, gameCode]);
 
+  // Проверяем статус игры и перенаправляем если нужно
+  useEffect(() => {
+    if (game?.status === 'waiting') {
+      navigate(`/host-waiting/${gameCode}`);
+    }
+  }, [game?.status, gameCode, navigate]);
+
   useEffect(() => {
     if (!gameCode) {
       navigate('/host-editor');

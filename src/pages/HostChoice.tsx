@@ -46,6 +46,12 @@ export const HostChoice: React.FC = () => {
         return;
       }
 
+      if (game.status === 'playing') {
+        setError('❌ Игра уже идет, присоединиться нельзя');
+        setIsLoading(false);
+        return;
+      }
+
       localStorage.setItem('gameCode', gameCode.toUpperCase());
       navigate(`/host-game/${gameCode.toUpperCase()}`);
     } catch (err) {

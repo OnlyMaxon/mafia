@@ -19,6 +19,12 @@ export const PlayerWaiting: React.FC = () => {
       return;
     }
 
+    const playerId = localStorage.getItem('playerId');
+    if (!playerId) {
+      navigate('/player-join');
+      return;
+    }
+
     // Подписываемся на изменения игры и игроков
     const unsubscribeGame = GameService.watchGame(gameCode, (updatedGame) => {
       setGame(updatedGame);
@@ -28,16 +34,19 @@ export const PlayerWaiting: React.FC = () => {
       setLoading(false);
     });
 
-    const unsubscribePlayers = GameService.watchPlayers(gameCode, (updatedPlayers) => {
-      setPlayers(updatedPlayers);
+    const unsubscribePlayers = GameService.watchPlayersForPlayer(
+      gameCode,
+      playerId,
+      (updatedPlayers) => {
+        setPlayers(updatedPlayers);
 
-      // Проверяем нашу роль
-      const playerId = localStorage.getItem('playerId');
-      const currentPlayer = updatedPlayers.find((p) => p.id === playerId);
-      if (currentPlayer?.role) {
-        setPlayerRole(currentPlayer.role);
+        // Проверяем нашу роль
+        const currentPlayer = updatedPlayers.find((p) => p.id === playerId);
+        if (currentPlayer?.role) {
+          setPlayerRole(currentPlayer.role);
+        }
       }
-    });
+    );
 
     return () => {
       unsubscribeGame();
