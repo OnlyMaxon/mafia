@@ -10,9 +10,7 @@ export const HostGame: React.FC = () => {
   const navigate = useNavigate();
   const [game, setGame] = useState<GameState | null>(null);
   const [players, setPlayers] = useState<Player[]>([]);
-  const [notes, setNotes] = useState(() => {
-    return localStorage.getItem(`notes_${gameCode}`) || '';
-  });
+  const [notes, setNotes] = useState(() => localStorage.getItem(`notes_${gameCode}`) || '');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,6 +37,7 @@ export const HostGame: React.FC = () => {
         setTimeout(() => {
           if (window.confirm('🎉 Game over! Start a new game?')) {
             localStorage.removeItem(`notes_${gameCode}`);
+            localStorage.removeItem('gameCode');
             navigate('/host-editor');
           }
         }, 500);
@@ -55,18 +54,14 @@ export const HostGame: React.FC = () => {
     };
   }, [gameCode, navigate]);
 
-  const handleClearNotes = () => {
-    setNotes('');
-  };
-
   const handleFinishGame = async () => {
     if (!gameCode) return;
-
     if (window.confirm('🛑 Are you sure? All game data will be deleted from the server!')) {
       await GameService.updateGameStatus(gameCode, 'finished');
       await new Promise(resolve => setTimeout(resolve, 2000));
       await GameService.deleteGame(gameCode);
       localStorage.removeItem(`notes_${gameCode}`);
+      localStorage.removeItem('gameCode');
       navigate('/host-editor');
     }
   };
@@ -100,7 +95,7 @@ export const HostGame: React.FC = () => {
         <div className="game-header">
           <div>
             <h1>👑 Host</h1>
-            <p className="game-code">Code: {gameCode}</p>
+            <p className="game-code">{gameCode}</p>
           </div>
           <button className="btn btn-danger" onClick={handleFinishGame}>
             🏁 End Game
@@ -109,7 +104,7 @@ export const HostGame: React.FC = () => {
 
         <div className="game-content">
           <div className="players-section">
-            <h2>👥 Player Roles ({players.length})</h2>
+            <h2>Player Roles ({players.length})</h2>
             <div className="players-grid">
               {players.map((player, index) => (
                 <div key={player.id} className="player-card">
@@ -117,7 +112,7 @@ export const HostGame: React.FC = () => {
                   <div className="player-info">
                     <div className="player-name">{player.name}</div>
                     <div className={`player-role role-${player.role}`}>
-                      {player.role ? getRoleName(player.role as any) : '?'}
+                      {player.role ? getRoleName(player.role as any) : '—'}
                     </div>
                   </div>
                   {!player.isAlive && <div className="dead-badge">💀</div>}
@@ -127,18 +122,18 @@ export const HostGame: React.FC = () => {
           </div>
 
           <div className="notes-section">
-            <h2>📝 Host Notes</h2>
+            <h2>Host Notes</h2>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Write your notes here...
+              placeholder="Write notes here...
 e.g.:
 - Day 1: voted out John
 - Doctor was killed
 - Maniac is active"
               className="notes-textarea"
             />
-            <button className="btn btn-secondary" onClick={handleClearNotes}>
+            <button className="btn btn-secondary" onClick={() => setNotes('')}>
               🗑️ Clear Notes
             </button>
           </div>

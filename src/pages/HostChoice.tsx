@@ -10,17 +10,9 @@ export const HostChoice: React.FC = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleCreateNew = async () => {
-    setIsLoading(true);
-    try {
-      const hostId = `host_${Date.now()}`;
-      const code = await GameService.createGame(hostId);
-      localStorage.setItem('gameCode', code);
-      navigate('/host-editor');
-    } catch (err) {
-      setError('Error creating game');
-    }
-    setIsLoading(false);
+  const handleCreateNew = () => {
+    localStorage.removeItem('gameCode');
+    navigate('/host-editor');
   };
 
   const handleJoinGame = async () => {
@@ -68,39 +60,26 @@ export const HostChoice: React.FC = () => {
         </button>
 
         {mode === 'choice' ? (
-          <div className="choice-card">
+          <div className="choice-card animate-in">
             <h1>👑 Host</h1>
             <p className="description">Choose an action</p>
 
             <div className="buttons-group">
-              <button
-                className="action-btn create-btn"
-                onClick={handleCreateNew}
-                disabled={isLoading}
-              >
+              <button className="action-btn create-btn" onClick={handleCreateNew}>
                 ➕ Create new game
               </button>
 
-              <button
-                className="action-btn join-btn"
-                onClick={() => setMode('join')}
-                disabled={isLoading}
-              >
+              <button className="action-btn join-btn" onClick={() => setMode('join')}>
                 🔄 Join a game
               </button>
             </div>
           </div>
         ) : (
-          <div className="choice-card">
+          <div className="choice-card animate-in">
             <h1>👑 Join Game</h1>
             <p className="description">Enter room code</p>
 
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleJoinGame();
-              }}
-            >
+            <form onSubmit={(e) => { e.preventDefault(); handleJoinGame(); }}>
               <div className="form-group">
                 <input
                   type="text"
@@ -109,6 +88,7 @@ export const HostChoice: React.FC = () => {
                   placeholder="e.g. ABC123"
                   maxLength={6}
                   autoFocus
+                  className="code-input"
                 />
               </div>
 
@@ -126,11 +106,7 @@ export const HostChoice: React.FC = () => {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => {
-                    setMode('choice');
-                    setGameCode('');
-                    setError('');
-                  }}
+                  onClick={() => { setMode('choice'); setGameCode(''); setError(''); }}
                   disabled={isLoading}
                 >
                   ← Back

@@ -26,12 +26,19 @@ export const HostEditor: React.FC = () => {
       navigate('/host-auth');
       return;
     }
-
     initializeGame();
   }, [navigate]);
 
   const initializeGame = async () => {
     try {
+      const existingCode = localStorage.getItem('gameCode');
+      if (existingCode) {
+        const game = await GameService.getGame(existingCode);
+        if (game && game.status === 'waiting') {
+          setGameCode(existingCode);
+          return;
+        }
+      }
       const hostId = `host_${Date.now()}`;
       const code = await GameService.createGame(hostId);
       setGameCode(code);
@@ -45,19 +52,18 @@ export const HostEditor: React.FC = () => {
   const handleRoleChange = (role: keyof GameRoles, value: number) => {
     const newRoles = { ...roles, [role]: Math.max(0, value) };
     setRoles(newRoles);
-
     const total = Object.values(newRoles).reduce((a, b) => a + b, 0);
     setPlayerCount(total);
   };
 
   const handleStartGame = async () => {
-    if (!validateRolesSum(roles, playerCount)) {
-      setShowAlert('⚠️ Total roles must match player count!');
+    if (playerCount === 0) {
+      setShowAlert('⚠️ Add at least one player!');
       return;
     }
 
-    if (playerCount === 0) {
-      setShowAlert('⚠️ Add at least one player!');
+    if (!validateRolesSum(roles, playerCount)) {
+      setShowAlert('⚠️ Total roles must match player count!');
       return;
     }
 
@@ -73,7 +79,7 @@ export const HostEditor: React.FC = () => {
     setIsLoading(false);
   };
 
-  const roleLabels = {
+  const roleLabels: Record<keyof GameRoles, string> = {
     mafia: '🔪 Mafia',
     sheriff: '⭐ Sheriff',
     doctor: '💊 Doctor',
@@ -89,38 +95,30 @@ export const HostEditor: React.FC = () => {
           ← Exit
         </button>
 
-        <div className="editor-card">
+        <div className="editor-card animate-in">
           <h1>⚙️ Game Setup</h1>
-          <p className="game-code">Room code: <strong>{gameCode}</strong></p>
+
+          <div className="game-code-badge">
+            <span className="badge-label">Room Code</span>
+            <span className="badge-value">{gameCode || '...'}</span>
+          </div>
 
           <div className="roles-grid">
-            {Object.entries(roleLabels).map(([role, label]) => (
+            {(Object.entries(roleLabels) as [keyof GameRoles, string][]).map(([role, label]) => (
               <div key={role} className="role-input-group">
                 <label>{label}</label>
                 <div className="input-group">
                   <button
-                    onClick={() =>
-                      handleRoleChange(role as keyof GameRoles, roles[role as keyof GameRoles] - 1)
-                    }
-                    disabled={roles[role as keyof GameRoles] === 0}
-                  >
-                    −
-                  </button>
+                    onClick={() => handleRoleChange(role, roles[role] - 1)}
+                    disabled={roles[role] === 0}
+                  >−</button>
                   <input
                     type="number"
-                    value={roles[role as keyof GameRoles]}
-                    onChange={(e) =>
-                      handleRoleChange(role as keyof GameRoles, parseInt(e.target.value) || 0)
-                    }
+                    value={roles[role]}
+                    onChange={(e) => handleRoleChange(role, parseInt(e.target.value) || 0)}
                     min="0"
                   />
-                  <button
-                    onClick={() =>
-                      handleRoleChange(role as keyof GameRoles, roles[role as keyof GameRoles] + 1)
-                    }
-                  >
-                    +
-                  </button>
+                  <button onClick={() => handleRoleChange(role, roles[role] + 1)}>+</button>
                 </div>
               </div>
             ))}

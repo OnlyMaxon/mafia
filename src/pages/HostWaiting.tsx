@@ -36,20 +36,13 @@ export const HostWaiting: React.FC = () => {
 
   const handleStartGame = async () => {
     if (!game) return;
-
     setIsStarting(true);
-
     try {
       const playersWithRoles = assignRolesToPlayers(players, game.roles);
-
       for (const player of playersWithRoles) {
-        await GameService.updatePlayerStatus(gameCode!, player.id, {
-          role: player.role,
-        });
+        await GameService.updatePlayerStatus(gameCode!, player.id, { role: player.role });
       }
-
       await GameService.startGame(gameCode!, game.roles);
-
       navigate(`/host-game/${gameCode}`);
     } catch (err) {
       console.error('Error starting game:', err);
@@ -98,10 +91,14 @@ export const HostWaiting: React.FC = () => {
 
         <div className="waiting-card">
           <h1>👑 Waiting for Players</h1>
-          <p className="game-code">Room code: <strong>{gameCode}</strong></p>
+
+          <div className="game-code-badge">
+            <span className="badge-label">Room Code</span>
+            <span className="badge-value">{gameCode}</span>
+          </div>
 
           <div className="info-section">
-            <h2>Role Setup:</h2>
+            <h2>Role Setup</h2>
             <div className="roles-summary">
               {rolesSummary.map((role, i) => (
                 <span key={i} className="role-tag">{role}</span>
@@ -110,18 +107,18 @@ export const HostWaiting: React.FC = () => {
           </div>
 
           <div className="players-section">
-            <h2>👥 Connected Players ({players.length}):</h2>
+            <h2>Connected Players ({players.length})</h2>
             <ul className="players-list">
               {players.length > 0 ? (
-                players.map((player) => (
+                players.map((player, idx) => (
                   <li key={player.id} className="player-item">
-                    <span className="player-number">{players.indexOf(player) + 1}.</span>
+                    <span className="player-number">{idx + 1}</span>
                     <span className="player-name">{player.name}</span>
                     <span className="player-status">✓</span>
                   </li>
                 ))
               ) : (
-                <li className="no-players">Waiting for players...</li>
+                <li className="no-players">Waiting for players to join...</li>
               )}
             </ul>
           </div>

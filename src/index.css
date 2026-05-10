@@ -1,11 +1,24 @@
 :root {
   --primary: #ff0064;
+  --primary-light: #ff4488;
+  --primary-dark: #cc0050;
   --secondary: #00d4ff;
-  --dark-bg: #1a1a2e;
-  --darker-bg: #16213e;
-  --text-light: #e0e0e0;
-  --text-medium: #b0b0b0;
-  --text-dark: #888888;
+  --secondary-dark: #0099cc;
+  --bg-deep: #0a0a1a;
+  --bg-base: #0d0d22;
+  --bg-card: rgba(12, 16, 40, 0.95);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-primary: rgba(255, 0, 100, 0.25);
+  --border-secondary: rgba(0, 212, 255, 0.25);
+  --text-primary: #ffffff;
+  --text-secondary: #a0aec0;
+  --text-muted: #5a6580;
+  --shadow-card: 0 24px 64px rgba(0, 0, 0, 0.6);
+  --shadow-primary: 0 12px 40px rgba(255, 0, 100, 0.3);
+  --shadow-secondary: 0 12px 40px rgba(0, 212, 255, 0.25);
+  --radius-card: 20px;
+  --radius-btn: 10px;
+  --radius-input: 10px;
 }
 
 * {
@@ -17,17 +30,15 @@
 html, body {
   width: 100%;
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
-  color: white;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
 
-body {
-  margin: 0;
-}
+body { margin: 0; }
 
 #root {
   width: 100%;
@@ -36,44 +47,182 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-}
+h1, h2, h3, h4, h5, h6 { font-weight: 700; }
 
 a {
   color: inherit;
   text-decoration: none;
 }
 
-button {
+button { font-family: inherit; }
+
+/* ── Shared card ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Shared back button ── */
+.back-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 28px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+  display: inline-block;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+
+/* ── Shared messages ── */
+.error-message {
+  background: rgba(255, 60, 60, 0.1);
+  border-left: 3px solid #ff4444;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: #ff8080;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.alert-message {
+  background: rgba(255, 165, 0, 0.1);
+  border-left: 3px solid #ffa500;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  color: #ffb366;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ── Shared btn base ── */
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 1rem;
+  font-weight: 700;
   font-family: inherit;
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  letter-spacing: 0.3px;
 }
 
-/* Scrollbar styling */
-#root::-webkit-scrollbar {
-  width: 8px;
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
 }
 
-#root::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+.btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
-#root::-webkit-scrollbar-thumb {
-  background: #ff0064;
-  border-radius: 4px;
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
-#root::-webkit-scrollbar-thumb:hover {
-  background: #ff6b9d;
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+  color: #fff;
 }
 
-code {
-  font-family: 'Courier New', monospace;
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+.btn-primary:hover:not(:disabled) {
+  box-shadow: var(--shadow-primary);
 }
 
+.btn-secondary {
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+  color: #fff;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  box-shadow: var(--shadow-secondary);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+  color: #fff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  box-shadow: 0 12px 32px rgba(255, 60, 60, 0.4);
+}
+
+.btn-large {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+}
+
+/* ── Shared form ── */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-input);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+}
+
+.form-group input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Page entrance animation ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-in {
+  animation: fadeUp 0.4s ease both;
+}
+
+/* ── Scrollbar ── */
+#root::-webkit-scrollbar { width: 6px; }
+#root::-webkit-scrollbar-track { background: transparent; }
+#root::-webkit-scrollbar-thumb { background: rgba(255, 0, 100, 0.4); border-radius: 3px; }
+#root::-webkit-scrollbar-thumb:hover { background: var(--primary); }

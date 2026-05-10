@@ -1,186 +1,251 @@
 .player-waiting {
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  background: linear-gradient(160deg, #080812 0%, #0a0a20 100%);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px;
+}
+
+.player-waiting .container {
+  max-width: 480px;
+  width: 100%;
 }
 
 .waiting-card {
-  background: rgba(22, 33, 62, 0.8);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 12px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
-  max-width: 500px;
-  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--radius-card);
+  padding: 44px 40px;
+  backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-card);
   text-align: center;
 }
 
 .waiting-card h1 {
-  font-size: 2rem;
-  margin: 0 0 20px 0;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 24px 0;
 }
 
-.game-code {
-  background: rgba(0, 212, 255, 0.1);
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  font-size: 1.1rem;
+/* ── Room code badge ── */
+.game-code-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 212, 255, 0.07);
+  border: 1px solid var(--border-secondary);
+  border-radius: 14px;
+  padding: 16px 24px;
+  margin-bottom: 28px;
 }
 
-.game-code strong {
-  color: #00d4ff;
-  font-weight: 700;
-}
-
-.role-revealed {
-  background: rgba(0, 212, 255, 0.15);
-  padding: 30px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  border: 2px dashed rgba(0, 212, 255, 0.4);
-  animation: pulse 0.5s ease-in-out;
-}
-
-.role-revealed h2 {
-  margin: 0 0 15px 0;
-  color: #00d4ff;
-}
-
-.role-badge {
-  font-size: 2.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ff0064 0%, #ff6b9d 100%);
-  padding: 20px;
-  border-radius: 8px;
+.badge-label {
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 
+.badge-value {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: var(--secondary);
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Role waiting ── */
 .role-waiting {
-  background: rgba(255, 165, 0, 0.1);
-  padding: 30px;
-  border-radius: 12px;
-  margin-bottom: 30px;
-  border: 2px dashed rgba(255, 165, 0, 0.4);
+  background: rgba(255, 165, 0, 0.06);
+  border: 1px dashed rgba(255, 165, 0, 0.3);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
 }
 
-.role-waiting h2 {
+.role-waiting .waiting-spinner {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 10px;
+  animation: spin-pulse 2s ease-in-out infinite;
+}
+
+.role-waiting p {
+  color: #cc8800;
+  font-weight: 600;
+  font-size: 0.95rem;
   margin: 0;
-  color: #ffb366;
-  animation: blink 1.5s infinite;
 }
 
+@keyframes spin-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.15); opacity: 0.7; }
+}
+
+/* ── Role revealed ── */
+.role-revealed {
+  border-radius: 18px;
+  padding: 28px 24px;
+  margin-bottom: 24px;
+  border: 2px solid;
+  animation: roleReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes roleReveal {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.role-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  opacity: 0.7;
+}
+
+.role-icon {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.role-name {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.role-desc {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  font-weight: 500;
+}
+
+/* Role-specific colors */
+.role-revealed-mafia {
+  background: rgba(200, 0, 40, 0.12);
+  border-color: rgba(220, 20, 60, 0.4);
+}
+.role-revealed-mafia .role-name { color: #ff6b6b; }
+
+.role-revealed-sheriff {
+  background: rgba(0, 180, 220, 0.1);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+.role-revealed-sheriff .role-name { color: #00d4ff; }
+
+.role-revealed-doctor {
+  background: rgba(0, 200, 80, 0.1);
+  border-color: rgba(0, 230, 118, 0.4);
+}
+.role-revealed-doctor .role-name { color: #00e676; }
+
+.role-revealed-maniac {
+  background: rgba(180, 0, 180, 0.12);
+  border-color: rgba(220, 0, 220, 0.4);
+}
+.role-revealed-maniac .role-name { color: #ee00ee; }
+
+.role-revealed-prostitute {
+  background: rgba(220, 60, 140, 0.1);
+  border-color: rgba(255, 100, 180, 0.4);
+}
+.role-revealed-prostitute .role-name { color: #ff64b4; }
+
+.role-revealed-civilian {
+  background: rgba(120, 120, 150, 0.1);
+  border-color: rgba(160, 160, 200, 0.3);
+}
+.role-revealed-civilian .role-name { color: #a0a8c0; }
+
+/* ── Players list ── */
 .players-list {
   text-align: left;
+  margin-bottom: 20px;
 }
 
 .players-list h3 {
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: #e0e0e0;
+  margin: 0 0 12px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
 }
 
 .players-list ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
   overflow: hidden;
 }
 
 .players-list li {
-  padding: 12px 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 0.9rem;
 }
 
-.players-list li:last-child {
-  border-bottom: none;
-}
+.players-list li:last-child { border-bottom: none; }
 
 .player-name {
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
 }
 
-.player-role {
-  background: rgba(255, 0, 100, 0.2);
-  color: #ff0064;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.85rem;
-  font-weight: 600;
+.player-role-badge {
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
+/* ── Game started banner ── */
 .game-started {
-  background: rgba(0, 212, 255, 0.15);
-  padding: 20px;
-  border-radius: 8px;
-  border: 2px solid rgba(0, 212, 255, 0.4);
-  margin-top: 20px;
-  animation: slideIn 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-weight: 700;
+  color: var(--secondary);
+  font-size: 1rem;
+  animation: fadeUp 0.5s ease both;
 }
 
-.game-started h2 {
-  margin: 0;
-  color: #00d4ff;
-  font-size: 1.5rem;
+.started-icon {
+  font-size: 1.4rem;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes blink {
-  0%, 49%, 100% {
-    opacity: 1;
-  }
-  50%, 99% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .waiting-card {
-    padding: 30px 20px;
+    padding: 32px 20px;
   }
 
   .waiting-card h1 {
     font-size: 1.5rem;
   }
 
-  .role-badge {
-    font-size: 2rem;
-    padding: 15px;
+  .role-name {
+    font-size: 1.6rem;
+  }
+
+  .role-icon {
+    font-size: 2.8rem;
   }
 }
