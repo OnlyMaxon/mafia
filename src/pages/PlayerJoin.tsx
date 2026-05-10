@@ -22,32 +22,29 @@ export const PlayerJoin: React.FC = () => {
     setIsLoading(true);
 
     try {
-      // Проверяем, существует ли игра
       const game = await GameService.getGame(gameCode.toUpperCase());
-      
+
       if (!game) {
-        setError('❌ Комната не найдена');
+        setError('❌ Room not found');
         setIsLoading(false);
         return;
       }
 
       if (game.status === 'finished') {
-        setError('❌ Эта игра уже завершена');
+        setError('❌ This game is already finished');
         setIsLoading(false);
         return;
       }
 
-      // Добавляем игрока
       const playerId = await GameService.addPlayer(gameCode.toUpperCase(), playerName);
-      
-      // Сохраняем данные и переходим в комнату
+
       localStorage.setItem('playerId', playerId);
       localStorage.setItem('playerName', playerName);
       localStorage.setItem('gameCode', gameCode.toUpperCase());
-      
+
       navigate(`/player-waiting/${gameCode.toUpperCase()}`);
     } catch (err) {
-      setError('❌ Ошибка при присоединении к комнате');
+      setError('❌ Error joining room');
       console.error(err);
     }
     setIsLoading(false);
@@ -57,22 +54,22 @@ export const PlayerJoin: React.FC = () => {
     <div className="player-join">
       <div className="container">
         <button className="back-btn" onClick={() => navigate('/')}>
-          ← Назад
+          ← Back
         </button>
 
         <div className="join-card">
-          <h1>🎮 Присоединиться к игре</h1>
-          <p className="description">Введите код комнаты и своё имя</p>
+          <h1>🎮 Join Game</h1>
+          <p className="description">Enter room code and your name</p>
 
           <form onSubmit={handleJoin}>
             <div className="form-group">
-              <label htmlFor="gameCode">Код комнаты</label>
+              <label htmlFor="gameCode">Room Code</label>
               <input
                 id="gameCode"
                 type="text"
                 value={gameCode}
                 onChange={(e) => setGameCode(e.target.value.toUpperCase())}
-                placeholder="Например: ABC123"
+                placeholder="e.g. ABC123"
                 disabled={isLoading}
                 maxLength={6}
                 autoFocus
@@ -80,13 +77,13 @@ export const PlayerJoin: React.FC = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="playerName">Ваше имя</label>
+              <label htmlFor="playerName">Your Name</label>
               <input
                 id="playerName"
                 type="text"
                 value={playerName}
                 onChange={(e) => setPlayerName(e.target.value)}
-                placeholder="Введите ваше имя"
+                placeholder="Enter your name"
                 disabled={isLoading}
                 maxLength={20}
               />
@@ -99,7 +96,7 @@ export const PlayerJoin: React.FC = () => {
               className="btn btn-primary"
               disabled={isLoading || !gameCode || !playerName}
             >
-              {isLoading ? '⏳ Подключение...' : '✓ Присоединиться'}
+              {isLoading ? '⏳ Connecting...' : '✓ Join'}
             </button>
           </form>
         </div>

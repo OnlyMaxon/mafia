@@ -21,14 +21,12 @@ export const HostEditor: React.FC = () => {
   const [error, setError] = useState('');
   const [showAlert, setShowAlert] = useState('');
 
-  // Проверяем авторизацию
   useEffect(() => {
     if (localStorage.getItem('hostAuthorized') !== 'true') {
       navigate('/host-auth');
       return;
     }
 
-    // Создаем новую игру
     initializeGame();
   }, [navigate]);
 
@@ -39,7 +37,7 @@ export const HostEditor: React.FC = () => {
       setGameCode(code);
       localStorage.setItem('gameCode', code);
     } catch (err) {
-      setError('Ошибка при создании игры');
+      setError('Error creating game');
       console.error(err);
     }
   };
@@ -48,19 +46,18 @@ export const HostEditor: React.FC = () => {
     const newRoles = { ...roles, [role]: Math.max(0, value) };
     setRoles(newRoles);
 
-    // Обновляем общее количество
     const total = Object.values(newRoles).reduce((a, b) => a + b, 0);
     setPlayerCount(total);
   };
 
   const handleStartGame = async () => {
     if (!validateRolesSum(roles, playerCount)) {
-      setShowAlert('⚠️ Сумма ролей не совпадает с количеством игроков!');
+      setShowAlert('⚠️ Total roles must match player count!');
       return;
     }
 
     if (playerCount === 0) {
-      setShowAlert('⚠️ Добавьте хотя бы одного игрока!');
+      setShowAlert('⚠️ Add at least one player!');
       return;
     }
 
@@ -70,31 +67,31 @@ export const HostEditor: React.FC = () => {
       localStorage.setItem('gameRoles', JSON.stringify(roles));
       navigate(`/host-waiting/${gameCode}`);
     } catch (err) {
-      setShowAlert('❌ Ошибка при запуске игры');
+      setShowAlert('❌ Error starting game');
       console.error(err);
     }
     setIsLoading(false);
   };
 
   const roleLabels = {
-    mafia: '🔪 Мафия',
-    sheriff: '⭐ Шериф',
-    doctor: '💊 Доктор',
-    maniac: '😈 Маньяк',
-    prostitute: '👯 Путана',
-    civilian: '👤 Мирный',
+    mafia: '🔪 Mafia',
+    sheriff: '⭐ Sheriff',
+    doctor: '💊 Doctor',
+    maniac: '😈 Maniac',
+    prostitute: '👯 Courtesan',
+    civilian: '👤 Civilian',
   };
 
   return (
     <div className="host-editor">
       <div className="container">
         <button className="back-btn" onClick={() => navigate('/')}>
-          ← Выход
+          ← Exit
         </button>
 
         <div className="editor-card">
-          <h1>⚙️ Настройка игры</h1>
-          <p className="game-code">Код комнаты: <strong>{gameCode}</strong></p>
+          <h1>⚙️ Game Setup</h1>
+          <p className="game-code">Room code: <strong>{gameCode}</strong></p>
 
           <div className="roles-grid">
             {Object.entries(roleLabels).map(([role, label]) => (
@@ -131,7 +128,7 @@ export const HostEditor: React.FC = () => {
 
           <div className="player-count">
             <p>
-              Всего игроков: <strong className={playerCount > 0 ? 'valid' : 'invalid'}>
+              Total players: <strong className={playerCount > 0 ? 'valid' : 'invalid'}>
                 {playerCount}
               </strong>
             </p>
@@ -145,7 +142,7 @@ export const HostEditor: React.FC = () => {
             onClick={handleStartGame}
             disabled={isLoading || playerCount === 0}
           >
-            {isLoading ? '⏳ Запуск...' : '▶️ Начать'}
+            {isLoading ? '⏳ Starting...' : '▶️ Start'}
           </button>
         </div>
       </div>

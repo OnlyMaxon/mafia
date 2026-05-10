@@ -15,13 +15,12 @@ export const HostAuth: React.FC = () => {
     setError('');
     setIsLoading(true);
 
-    // Имитируем проверку пароля
     setTimeout(() => {
       if (password === HOST_PASSWORD) {
         localStorage.setItem('hostAuthorized', 'true');
         navigate('/host-choice');
       } else {
-        setError('❌ Неверный пароль');
+        setError('❌ Wrong password');
         setPassword('');
       }
       setIsLoading(false);
@@ -32,22 +31,22 @@ export const HostAuth: React.FC = () => {
     <div className="host-auth">
       <div className="container">
         <button className="back-btn" onClick={() => navigate('/')}>
-          ← Назад
+          ← Back
         </button>
 
         <div className="auth-card">
-          <h1>👑 Вход Ведущего</h1>
-          <p className="description">Введите пароль ведущего, чтобы продолжить</p>
+          <h1>👑 Host Login</h1>
+          <p className="description">Enter the host password to continue</p>
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="password">Пароль</label>
+              <label htmlFor="password">Password</label>
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Введите пароль"
+                placeholder="Enter password"
                 disabled={isLoading}
                 autoFocus
               />
@@ -60,7 +59,7 @@ export const HostAuth: React.FC = () => {
               className="btn btn-primary"
               disabled={isLoading || !password}
             >
-              {isLoading ? '⏳ Проверка...' : '✓ Вход'}
+              {isLoading ? '⏳ Checking...' : '✓ Login'}
             </button>
           </form>
         </div>

@@ -19,7 +19,6 @@ export const HostWaiting: React.FC = () => {
       return;
     }
 
-    // Подписываемся на изменения игры и игроков
     const unsubscribeGame = GameService.watchGame(gameCode, (updatedGame) => {
       setGame(updatedGame);
       setLoading(false);
@@ -41,23 +40,19 @@ export const HostWaiting: React.FC = () => {
     setIsStarting(true);
 
     try {
-      // Раздаем роли игрокам
       const playersWithRoles = assignRolesToPlayers(players, game.roles);
 
-      // Обновляем каждого игрока с его ролью
       for (const player of playersWithRoles) {
         await GameService.updatePlayerStatus(gameCode!, player.id, {
           role: player.role,
         });
       }
 
-      // Запускаем игру
       await GameService.startGame(gameCode!, game.roles);
 
-      // Переходим на страницу хоста во время игры
       navigate(`/host-game/${gameCode}`);
     } catch (err) {
-      console.error('Ошибка при запуске игры:', err);
+      console.error('Error starting game:', err);
       setIsStarting(false);
     }
   };
@@ -66,7 +61,7 @@ export const HostWaiting: React.FC = () => {
     return (
       <div className="host-waiting">
         <div className="container">
-          <h1>⏳ Загрузка...</h1>
+          <h1>⏳ Loading...</h1>
         </div>
       </div>
     );
@@ -76,9 +71,9 @@ export const HostWaiting: React.FC = () => {
     return (
       <div className="host-waiting">
         <div className="container">
-          <h1>❌ Игра не найдена</h1>
+          <h1>❌ Game not found</h1>
           <button className="btn btn-secondary" onClick={() => navigate('/host-editor')}>
-            ← Вернуться
+            ← Back
           </button>
         </div>
       </div>
@@ -86,27 +81,27 @@ export const HostWaiting: React.FC = () => {
   }
 
   const rolesSummary = [
-    `🔪 Мафия: ${game.roles.mafia}`,
-    `⭐ Шериф: ${game.roles.sheriff}`,
-    `💊 Доктор: ${game.roles.doctor}`,
-    `😈 Маньяк: ${game.roles.maniac}`,
-    `👯 Путана: ${game.roles.prostitute}`,
-    `👤 Мирных: ${game.roles.civilian}`,
+    `🔪 Mafia: ${game.roles.mafia}`,
+    `⭐ Sheriff: ${game.roles.sheriff}`,
+    `💊 Doctor: ${game.roles.doctor}`,
+    `😈 Maniac: ${game.roles.maniac}`,
+    `👯 Courtesan: ${game.roles.prostitute}`,
+    `👤 Civilian: ${game.roles.civilian}`,
   ];
 
   return (
     <div className="host-waiting">
       <div className="container">
         <button className="back-btn" onClick={() => navigate('/host-editor')}>
-          ← Назад
+          ← Back
         </button>
 
         <div className="waiting-card">
-          <h1>👑 Ожидание игроков</h1>
-          <p className="game-code">Код комнаты: <strong>{gameCode}</strong></p>
+          <h1>👑 Waiting for Players</h1>
+          <p className="game-code">Room code: <strong>{gameCode}</strong></p>
 
           <div className="info-section">
-            <h2>Расстановка ролей:</h2>
+            <h2>Role Setup:</h2>
             <div className="roles-summary">
               {rolesSummary.map((role, i) => (
                 <span key={i} className="role-tag">{role}</span>
@@ -115,7 +110,7 @@ export const HostWaiting: React.FC = () => {
           </div>
 
           <div className="players-section">
-            <h2>👥 Подключенные игроки ({players.length}):</h2>
+            <h2>👥 Connected Players ({players.length}):</h2>
             <ul className="players-list">
               {players.length > 0 ? (
                 players.map((player) => (
@@ -126,7 +121,7 @@ export const HostWaiting: React.FC = () => {
                   </li>
                 ))
               ) : (
-                <li className="no-players">Ожидание игроков...</li>
+                <li className="no-players">Waiting for players...</li>
               )}
             </ul>
           </div>
@@ -136,7 +131,7 @@ export const HostWaiting: React.FC = () => {
             onClick={handleStartGame}
             disabled={isStarting || players.length === 0}
           >
-            {isStarting ? '⏳ Запуск игры...' : '▶️ Начать игру'}
+            {isStarting ? '⏳ Starting game...' : '▶️ Start Game'}
           </button>
         </div>
       </div>

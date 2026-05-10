@@ -25,7 +25,6 @@ export const PlayerWaiting: React.FC = () => {
       return;
     }
 
-    // Подписываемся на изменения игры и игроков
     const unsubscribeGame = GameService.watchGame(gameCode, (updatedGame) => {
       setGame(updatedGame);
       if (updatedGame?.status === 'playing') {
@@ -40,7 +39,6 @@ export const PlayerWaiting: React.FC = () => {
       (updatedPlayers) => {
         setPlayers(updatedPlayers);
 
-        // Проверяем нашу роль
         const currentPlayer = updatedPlayers.find((p) => p.id === playerId);
         if (currentPlayer?.role) {
           setPlayerRole(currentPlayer.role);
@@ -58,7 +56,7 @@ export const PlayerWaiting: React.FC = () => {
     return (
       <div className="player-waiting">
         <div className="container">
-          <h1>⏳ Загрузка...</h1>
+          <h1>⏳ Loading...</h1>
         </div>
       </div>
     );
@@ -68,9 +66,9 @@ export const PlayerWaiting: React.FC = () => {
     return (
       <div className="player-waiting">
         <div className="container">
-          <h1>❌ Комната не найдена</h1>
+          <h1>❌ Room not found</h1>
           <button className="btn btn-secondary" onClick={() => navigate('/player-join')}>
-            ← Вернуться
+            ← Back
           </button>
         </div>
       </div>
@@ -82,10 +80,10 @@ export const PlayerWaiting: React.FC = () => {
       <div className="player-waiting">
         <div className="container">
           <div className="waiting-card">
-            <h1>🎉 Игра завершена!</h1>
-            <p className="game-code">Код: {gameCode}</p>
+            <h1>🎉 Game Over!</h1>
+            <p className="game-code">Code: {gameCode}</p>
             <button className="btn btn-secondary" onClick={() => navigate('/player-join')}>
-              ← Вернуться к входу
+              ← Back to Join
             </button>
           </div>
         </div>
@@ -97,22 +95,22 @@ export const PlayerWaiting: React.FC = () => {
     <div className="player-waiting">
       <div className="container">
         <div className="waiting-card">
-          <h1>🎭 Ожидание начала игры</h1>
-          <p className="game-code">Код: {gameCode}</p>
+          <h1>🎭 Waiting for Game to Start</h1>
+          <p className="game-code">Code: {gameCode}</p>
 
           {playerRole ? (
             <div className="role-revealed">
-              <h2>🎭 Ваша роль:</h2>
+              <h2>🎭 Your Role:</h2>
               <div className="role-badge">{playerRole}</div>
             </div>
           ) : (
             <div className="role-waiting">
-              <h2>⏳ Ожидание получения роли...</h2>
+              <h2>⏳ Waiting for role...</h2>
             </div>
           )}
 
           <div className="players-list">
-            <h3>👥 Игроки ({players.length}):</h3>
+            <h3>👥 Players ({players.length}):</h3>
             <ul>
               {players.map((player) => (
                 <li key={player.id}>
@@ -125,7 +123,7 @@ export const PlayerWaiting: React.FC = () => {
 
           {gameStarted && (
             <div className="game-started">
-              <h2>🎮 Игра началась!</h2>
+              <h2>🎮 Game Started!</h2>
             </div>
           )}
         </div>

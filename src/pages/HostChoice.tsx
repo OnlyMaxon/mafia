@@ -18,7 +18,7 @@ export const HostChoice: React.FC = () => {
       localStorage.setItem('gameCode', code);
       navigate('/host-editor');
     } catch (err) {
-      setError('Ошибка при создании игры');
+      setError('Error creating game');
     }
     setIsLoading(false);
   };
@@ -26,28 +26,28 @@ export const HostChoice: React.FC = () => {
   const handleJoinGame = async () => {
     setError('');
     if (!gameCode.trim()) {
-      setError('⚠️ Введите код комнаты');
+      setError('⚠️ Enter room code');
       return;
     }
 
     setIsLoading(true);
     try {
       const game = await GameService.getGame(gameCode.toUpperCase());
-      
+
       if (!game) {
-        setError('❌ Комната не найдена');
+        setError('❌ Room not found');
         setIsLoading(false);
         return;
       }
 
       if (game.status === 'finished') {
-        setError('❌ Эта игра уже завершена');
+        setError('❌ This game is already finished');
         setIsLoading(false);
         return;
       }
 
       if (game.status === 'playing') {
-        setError('❌ Игра уже идет, присоединиться нельзя');
+        setError('❌ Game already in progress');
         setIsLoading(false);
         return;
       }
@@ -55,7 +55,7 @@ export const HostChoice: React.FC = () => {
       localStorage.setItem('gameCode', gameCode.toUpperCase());
       navigate(`/host-game/${gameCode.toUpperCase()}`);
     } catch (err) {
-      setError('❌ Ошибка подключения');
+      setError('❌ Connection error');
     }
     setIsLoading(false);
   };
@@ -64,13 +64,13 @@ export const HostChoice: React.FC = () => {
     <div className="host-choice">
       <div className="container">
         <button className="back-btn" onClick={() => navigate('/')}>
-          ← Назад
+          ← Back
         </button>
 
         {mode === 'choice' ? (
           <div className="choice-card">
-            <h1>👑 Ведущий</h1>
-            <p className="description">Выберите действие</p>
+            <h1>👑 Host</h1>
+            <p className="description">Choose an action</p>
 
             <div className="buttons-group">
               <button
@@ -78,7 +78,7 @@ export const HostChoice: React.FC = () => {
                 onClick={handleCreateNew}
                 disabled={isLoading}
               >
-                ➕ Создать новую игру
+                ➕ Create new game
               </button>
 
               <button
@@ -86,14 +86,14 @@ export const HostChoice: React.FC = () => {
                 onClick={() => setMode('join')}
                 disabled={isLoading}
               >
-                🔄 Присоединиться к игре
+                🔄 Join a game
               </button>
             </div>
           </div>
         ) : (
           <div className="choice-card">
-            <h1>👑 Присоединиться</h1>
-            <p className="description">Введите код комнаты</p>
+            <h1>👑 Join Game</h1>
+            <p className="description">Enter room code</p>
 
             <form
               onSubmit={(e) => {
@@ -106,7 +106,7 @@ export const HostChoice: React.FC = () => {
                   type="text"
                   value={gameCode}
                   onChange={(e) => setGameCode(e.target.value.toUpperCase())}
-                  placeholder="Например: ABC123"
+                  placeholder="e.g. ABC123"
                   maxLength={6}
                   autoFocus
                 />
@@ -120,7 +120,7 @@ export const HostChoice: React.FC = () => {
                   className="btn btn-primary"
                   disabled={isLoading || !gameCode}
                 >
-                  {isLoading ? '⏳ Подключение...' : '✓ Присоединиться'}
+                  {isLoading ? '⏳ Connecting...' : '✓ Join'}
                 </button>
 
                 <button
@@ -133,7 +133,7 @@ export const HostChoice: React.FC = () => {
                   }}
                   disabled={isLoading}
                 >
-                  ← Вернуться
+                  ← Back
                 </button>
               </div>
             </form>

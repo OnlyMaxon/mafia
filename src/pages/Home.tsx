@@ -9,51 +9,27 @@ export const Home: React.FC = () => {
     <div className="home">
       <div className="container">
         <header className="header">
-          <h1>👑 VISTULA FAMILY</h1>
-          <p className="subtitle">Мафия по ночам • Покер до утра • Афтерпати без правил</p>
+          <h1>🎭 MAFIA GAME</h1>
+          <p className="subtitle">Play online with your friends</p>
         </header>
-
-        <section className="about">
-          <h2>О нас</h2>
-          <p className="about-text">
-            💬 <strong>Чтобы попасть на игру, напишите Капо:</strong>
-          </p>
-          <p className="contact-info">
-            <a href="https://t.me/nikitosiiiiuuuk" target="_blank" rel="noopener noreferrer" className="contact-link">
-              📱 Telegram: @nikitosiiiiuuuk
-            </a>
-          </p>
-        </section>
-
-        <section className="socials">
-          <h3>🌐 Наши социальные сети</h3>
-          <div className="social-links">
-            <a href="https://www.instagram.com/vistula.family/" target="_blank" rel="noopener noreferrer" className="social-btn instagram">
-              📷 Instagram: @vistula.family
-            </a>
-            <a href="https://www.instagram.com/0nlymaxon/" target="_blank" rel="noopener noreferrer" className="social-btn instagram">
-              👑 Дон (Don): @0nlymaxon
-            </a>
-          </div>
-        </section>
 
         <div className="actions">
           <button
             className="btn btn-primary"
             onClick={() => navigate('/host-auth')}
           >
-            👑 Ведущий
+            👑 Host
           </button>
           <button
             className="btn btn-secondary"
             onClick={() => navigate('/player-join')}
           >
-            🎮 Играть
+            🎮 Play
           </button>
         </div>
 
         <footer className="footer">
-          <p>📱 Присоединитесь к Vistula Family • Играйте с друзьями</p>
+          <p>Join a game or host your own</p>
         </footer>
       </div>
     </div>
