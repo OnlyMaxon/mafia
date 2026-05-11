@@ -67,6 +67,39 @@
           "civilian": { ".validate": "newData.isNumber() && newData.val() >= 0" }
         }
       }
+    },
+    "roulette": {
+      "$gameCode": {
+        ".validate": "$gameCode.matches(/^[A-Z0-9]{6}$/)",
+        ".read": true,
+        ".write": "root.child('roulette').child($gameCode).exists() || newData.child('hostId').exists()",
+
+        "hostId":       { ".validate": "newData.isString() && newData.val().length > 0" },
+        "gameCode":     { ".validate": "newData.isString()" },
+        "status":       { ".validate": "newData.isString() && (newData.val() === 'waiting' || newData.val() === 'playing' || newData.val() === 'finished')" },
+        "currentChamber": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 5" },
+        "currentPlayerIndex": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "createdAt":    { ".validate": "newData.isNumber()" },
+        "updatedAt":    { ".validate": "newData.isNumber()" },
+        "winnerId":     { ".validate": "newData.isString() || newData.val() === null" },
+
+        "settings": {
+          "bullets": { ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5" }
+        },
+
+        "players": {
+          ".read": true,
+          ".write": "root.child('roulette').child($gameCode).exists()",
+          "$playerId": {
+            ".read": true,
+            ".write": true,
+            "id":      { ".validate": "newData.isString()" },
+            "name":    { ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 20" },
+            "isAlive": { ".validate": "newData.isBoolean()" },
+            "order":   { ".validate": "newData.isNumber()" }
+          }
+        }
+      }
     }
   }
 }
