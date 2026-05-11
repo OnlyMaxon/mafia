@@ -38,6 +38,15 @@ export const Home: React.FC = () => {
             </div>
             <span className="card-arrow">→</span>
           </button>
+
+          <button className="game-card card-roulette" onClick={() => navigate('/roulette')}>
+            <span className="card-emoji">🔫</span>
+            <div className="card-body">
+              <span className="card-title">Russian Roulette</span>
+              <span className="card-desc">One bullet. Who dares pull?</span>
+            </div>
+            <span className="card-arrow">→</span>
+          </button>
         </nav>
 
         <footer className="home-footer animate-in" style={{ animationDelay: '0.2s' }}>

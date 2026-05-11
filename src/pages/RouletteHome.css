@@ -1,6 +1,6 @@
-.home {
+.roulette-home {
   min-height: 100vh;
-  background: linear-gradient(160deg, #080812 0%, #0d0d22 60%, #10102a 100%);
+  background: linear-gradient(160deg, #0d0505 0%, #150808 60%, #1a0a0a 100%);
   color: #fff;
   display: flex;
   align-items: center;
@@ -10,93 +10,88 @@
   overflow: hidden;
 }
 
-/* ── Atmospheric background orbs ── */
-.home-bg {
+.rh-bg {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.orb {
+.rh-orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
 }
 
-.orb-1 {
+.rh-orb-1 {
   width: 500px;
   height: 500px;
-  background: rgba(255, 0, 100, 0.1);
+  background: rgba(180, 0, 0, 0.12);
   top: -180px;
   right: -150px;
 }
 
-.orb-2 {
+.rh-orb-2 {
   width: 400px;
   height: 400px;
-  background: rgba(0, 212, 255, 0.07);
+  background: rgba(120, 20, 0, 0.08);
   bottom: -150px;
   left: -120px;
 }
 
-.orb-3 {
+.rh-orb-3 {
   width: 200px;
   height: 200px;
-  background: rgba(255, 0, 100, 0.06);
+  background: rgba(200, 0, 0, 0.06);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-/* ── Container ── */
-.home-container {
+.rh-container {
   max-width: 480px;
   width: 100%;
   position: relative;
   z-index: 1;
 }
 
-/* ── Header ── */
-.header {
+.rh-header {
   text-align: center;
   margin-bottom: 48px;
 }
 
-.title-emoji {
+.rh-title-emoji {
   font-size: 3.8rem;
   display: block;
   margin-bottom: 4px;
   line-height: 1;
 }
 
-.header h1 {
-  font-size: 5rem;
+.rh-title {
+  font-size: 3.4rem;
   font-weight: 900;
   margin: 0 0 14px 0;
-  letter-spacing: 10px;
-  background: linear-gradient(135deg, #ff6699 0%, #ff0064 45%, #e0003e 100%);
+  letter-spacing: 6px;
+  background: linear-gradient(135deg, #ff6666 0%, #cc0000 45%, #8b0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.subtitle {
+.rh-subtitle {
   font-size: 0.95rem;
-  color: #5a6888;
+  color: #6a4040;
   font-weight: 400;
   letter-spacing: 0.8px;
-  text-transform: uppercase;
 }
 
-/* ── Cards ── */
-.game-cards {
+.rh-cards {
   display: flex;
   flex-direction: column;
   gap: 14px;
   margin-bottom: 40px;
 }
 
-.game-card {
+.rh-card {
   display: flex;
   align-items: center;
   gap: 18px;
@@ -110,95 +105,81 @@
   border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.card-host {
-  border-color: rgba(255, 0, 100, 0.15);
+.rh-card-host {
+  border-color: rgba(200, 0, 0, 0.2);
 }
 
-.card-host:hover {
-  background: rgba(255, 0, 100, 0.07);
-  border-color: rgba(255, 0, 100, 0.35);
+.rh-card-host:hover {
+  background: rgba(180, 0, 0, 0.1);
+  border-color: rgba(200, 0, 0, 0.45);
   transform: translateX(4px);
-  box-shadow: 0 16px 48px rgba(255, 0, 100, 0.15), inset 0 0 0 1px rgba(255, 0, 100, 0.1);
+  box-shadow: 0 16px 48px rgba(180, 0, 0, 0.2), inset 0 0 0 1px rgba(200, 0, 0, 0.1);
 }
 
-.card-play {
-  border-color: rgba(0, 212, 255, 0.15);
+.rh-card-play {
+  border-color: rgba(255, 140, 0, 0.15);
 }
 
-.card-play:hover {
-  background: rgba(0, 212, 255, 0.06);
-  border-color: rgba(0, 212, 255, 0.35);
+.rh-card-play:hover {
+  background: rgba(200, 80, 0, 0.08);
+  border-color: rgba(255, 140, 0, 0.4);
   transform: translateX(4px);
-  box-shadow: 0 16px 48px rgba(0, 212, 255, 0.12), inset 0 0 0 1px rgba(0, 212, 255, 0.08);
+  box-shadow: 0 16px 48px rgba(180, 80, 0, 0.15), inset 0 0 0 1px rgba(255, 140, 0, 0.08);
 }
 
-.card-emoji {
+.rh-card-emoji {
   font-size: 2.2rem;
   line-height: 1;
   flex-shrink: 0;
 }
 
-.card-body {
+.rh-card-body {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.card-title {
+.rh-card-title {
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0.3px;
 }
 
-.card-desc {
+.rh-card-desc {
   font-size: 0.82rem;
-  color: #4a5570;
+  color: #4a3030;
   font-weight: 400;
 }
 
-.card-arrow {
+.rh-card-arrow {
   font-size: 1.3rem;
-  color: #3a4560;
+  color: #3a2020;
   transition: color 0.2s, transform 0.2s;
   flex-shrink: 0;
 }
 
-.game-card:hover .card-arrow {
+.rh-card:hover .rh-card-arrow {
   transform: translateX(4px);
 }
 
-.card-host:hover .card-arrow    { color: rgba(255, 0, 100, 0.6); }
-.card-play:hover .card-arrow    { color: rgba(0, 212, 255, 0.6); }
-.card-roulette:hover .card-arrow { color: rgba(220, 38, 38, 0.7); }
+.rh-card-host:hover .rh-card-arrow { color: rgba(200, 0, 0, 0.7); }
+.rh-card-play:hover .rh-card-arrow  { color: rgba(255, 140, 0, 0.7); }
 
-.card-roulette {
-  border-color: rgba(180, 0, 0, 0.18);
-}
-
-.card-roulette:hover {
-  background: rgba(150, 0, 0, 0.09);
-  border-color: rgba(200, 0, 0, 0.42);
-  transform: translateX(4px);
-  box-shadow: 0 16px 48px rgba(180, 0, 0, 0.18), inset 0 0 0 1px rgba(200, 0, 0, 0.08);
-}
-
-/* ── Footer ── */
-.home-footer {
+.rh-footer {
   text-align: center;
-  color: #2e3550;
+  color: #3a2020;
   font-size: 0.8rem;
   letter-spacing: 0.5px;
 }
 
-/* ── Mobile ── */
 @media (max-width: 480px) {
-  .header h1 {
-    font-size: 3.8rem;
-    letter-spacing: 7px;
+  .rh-title {
+    font-size: 2.4rem;
+    letter-spacing: 4px;
   }
 
-  .game-card {
+  .rh-card {
     padding: 18px 20px;
   }
 }

@@ -1,0 +1,37 @@
+.rj-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0d0505 0%, #150808 60%, #1a0a0a 100%);
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 24px 48px;
+}
+
+.rj-container {
+  max-width: 420px;
+  width: 100%;
+}
+
+.rj-card {
+  background: rgba(20, 8, 8, 0.95);
+  border: 1px solid rgba(200, 0, 0, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(24px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+  padding: 36px 32px;
+}
+
+.rj-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.rj-subtitle {
+  text-align: center;
+  color: #6a4040;
+  font-size: 0.88rem;
+  margin-bottom: 28px;
+}
